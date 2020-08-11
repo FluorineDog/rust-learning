@@ -1,4 +1,4 @@
-use leetcode;
+use leetcode::*;
 
 #[cfg(test)]
 mod test_leetcode {
@@ -20,8 +20,8 @@ mod test_leetcode {
             (vec![3, 1, 5, 8], 167),
         ];
         for (data, ref_ans) in records {
-            let fuck = leetcode::
-
+            let ans = balloons_brust::Solution::max_coins(data);
+            assert_eq!(ref_ans);
         }
     }
 }
