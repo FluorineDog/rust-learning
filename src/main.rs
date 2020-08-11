@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use std::cmp;
+use std::collections::HashMap;
 struct Solution {}
 
 #[derive(PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -29,7 +29,8 @@ impl<'a> Solver<'a> {
             return 0;
         }
         if beg + 1 == end {
-            return lv * (beg as i32) * rv;
+            let mid_value = self.get(beg);
+            return lv * mid_value * rv;
         };
         let cache = self.cache.get(&index);
         if let Some(v) = cache {
@@ -41,18 +42,18 @@ impl<'a> Solver<'a> {
             let left_index = Index {
                 lv,
                 rv: mid_value,
-                range: (beg, mid)
+                range: (beg, mid),
             };
             let right_index = Index {
-                lv: mid_value, 
-                rv, 
-                range: (mid + 1, end)
+                lv: mid_value,
+                rv,
+                range: (mid + 1, end),
             };
             let lvv = self.get_coin(left_index);
             let rvv = self.get_coin(right_index);
             let nvv = lv * mid_value * rv;
             let the_vv = lvv + rvv + nvv;
-            the_max = cmp::max(the_max, the_vv) 
+            the_max = cmp::max(the_max, the_vv)
         }
         self.cache.insert(index, the_max);
         the_max
@@ -66,12 +67,16 @@ impl Solution {
             cache,
             nums: nums.as_ref(),
         };
-        solver.get_coin(Index{lv:1, rv:1, range:(0, nums.len() as u32)})
+        solver.get_coin(Index {
+            lv: 1,
+            rv: 1,
+            range: (0, nums.len() as u32),
+        })
     }
 }
 
 fn main() {
-    let vec = vec![1,5];
+    let vec = vec![1, 5];
     let x = Solution::max_coins(vec);
     println!("Hello, world!{}", x);
 }
