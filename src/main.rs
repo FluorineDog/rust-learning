@@ -1,5 +1,5 @@
-mod balloons_brust;
-use balloons_brust::Solution;
+mod leetcode;
+use leetcode::balloons_brust::Solution;
 
 fn main() {
     let vec = vec![1, 5];
